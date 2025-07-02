@@ -1,4 +1,4 @@
-#include "../include/are_hardlinked.h"
+#include "../../include/utilities/are_hardlinked.h"
 
 // Function to check if two files are hardlinked
 int are_hardlinked(const char *file1, const char *file2) {

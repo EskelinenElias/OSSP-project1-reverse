@@ -3,15 +3,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
+#include <unistd.h>
 
-// Define boolean constants
-#define TRUE 1
-#define FALSE 0
+#include "utilities/are_hardlinked.h"
 
-// Define constants
-#define MAX_NUM_LINES 1000 // Maximum number of lines to read
-#define MAX_LINE_LENGTH 256 // Maximum length of each line
+#include "read_lines_to_stack.h"
+#include "write_lines_from_stack.h"
+
+// Main function
+int main(int argc, char *argv[]); 
 
 #endif // MAIN_H
