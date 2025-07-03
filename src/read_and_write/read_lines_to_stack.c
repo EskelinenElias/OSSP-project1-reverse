@@ -1,23 +1,14 @@
-#include "../include/read_lines_to_stack.h"
+#include "../../include/read_and_write/read_lines_to_stack.h"
 
 // Function to read lines from a stream to a stack 
-linked_stack_t* read_lines_to_stack(FILE* stream) {
+int read_lines_to_stack(linked_stack_t* stack, FILE* stream) {
     
     // Input validation
-    if (!stream) {
+    if (!stack || !stream) {
         
         // Invalid input
         fprintf(stderr, "Failed to read line: invalid input\n");
-        return NULL;
-    }
-    
-    // Initialize linked stack 
-    linked_stack_t* stack = init_linked_stack(); 
-    if (!stack) {
-        
-        // Failed to initialize stack 
-        fprintf(stderr, "Failed to read line: failed to initialize stack\n");
-        return NULL;
+        return ERROR;
     }
     
     // Read lines from the stream and push them to the stack 
@@ -30,12 +21,12 @@ linked_stack_t* read_lines_to_stack(FILE* stream) {
             fprintf(stderr, "Failed to read line: failed to push line to stack\n");
             free(line);
             free_linked_stack(stack);
-            return NULL;
+            return ERROR;
         } 
     }
     
     // Successfully read lines to stack 
-    return stack;
+    return SUCCESS;
 }
 
 // EOF

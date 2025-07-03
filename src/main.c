@@ -50,14 +50,42 @@ int main(int argc, char *argv[]) {
             
         // Cannot open input file
         fprintf(stderr, "reverse: cannot open file '%s'\n", argv[1]);
+        if (argc == 3) fclose(output_stream); 
         return ERROR;
     }
     
+    // Initialize the stack
+    linked_stack_t* stack = init_linked_stack();
+    if (!stack) {
+        
+        // Failed to initialize stack
+        fprintf(stderr, "reverse: cannot initialize stack\n");
+        if (argc == 3) fclose(output_stream); 
+        if (argc >= 2) fclose(input_stream);
+        return ERROR;
+    }
+            
     // Read lines from input stream to a stack 
-    linked_stack_t* stack = read_lines_to_stack(input_stream); 
+    if (read_lines_to_stack(stack, input_stream) != SUCCESS) {
+        
+        // Cannot read lines from input file
+        fprintf(stderr, "reverse: cannot read lines from file '%s'\n", argv[1]);
+        free_linked_stack(stack); 
+        if (argc == 3) fclose(output_stream); 
+        if (argc >= 2) fclose(input_stream);
+        return ERROR;
+    }
     
     // Write lines from stack to output stream
-    write_lines_from_stack(stack, output_stream);
+    if (write_lines_from_stack(stack, output_stream) != SUCCESS) {
+        
+        // Cannot write lines to output file
+        fprintf(stderr, "reverse: cannot write lines to file '%s'\n", argv[2]);
+        free_linked_stack(stack); 
+        if (argc == 3) fclose(output_stream); 
+        if (argc >= 2) fclose(input_stream);
+        return ERROR;
+    }
     
     // Free the stack 
     free_linked_stack(stack);

@@ -1,4 +1,4 @@
-#include "../include/write_lines_from_stack.h"
+#include "../../include/read_and_write/write_lines_from_stack.h"
 
 // Function to write lines from a stack to a file stream
 int write_lines_from_stack(linked_stack_t* stack, FILE* stream) {
