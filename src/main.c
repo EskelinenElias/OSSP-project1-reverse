@@ -59,6 +59,9 @@ int main(int argc, char *argv[]) {
     // Write lines from stack to output stream
     write_lines_from_stack(stack, output_stream);
     
+    // Free the stack 
+    free_linked_stack(stack);
+    
     // Close input and output streams
     if (argc == 3) fclose(output_stream); 
     if (argc >= 2) fclose(input_stream);
